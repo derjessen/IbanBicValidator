@@ -35,10 +35,4 @@ public class Controllers {
     String index() {
         return "<h1>index</h1>";
     }
-
-    @RequestMapping("/deineMudda")
-    @ResponseBody
-    String mudda() {
-        return "is fett!";
-    }
 }
