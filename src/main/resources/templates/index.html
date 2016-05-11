@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Validate Iban Bic</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>Form</h1>
+        <form action="#" th:action="@{/validate}" th:object="${ibanBicForm}" method="post">
+            <p>Iban: <input type="text" th:field="*{iban}" placeholder="Iban" /></p>
+            <p>Bic: <input type="text" th:field="*{bic}" placeholder="Bic"/></p>
+            <p><input type="submit" value="Check" /></p>
+        </form>
+    </body>
+</html>

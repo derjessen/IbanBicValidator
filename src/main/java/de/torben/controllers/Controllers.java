@@ -1,38 +1,31 @@
 package de.torben.controllers;
 
-import org.iban4j.IbanFormatException;
-import org.iban4j.IbanUtil;
-import org.iban4j.InvalidCheckDigitException;
-import org.iban4j.UnsupportedCountryException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- *
- * @author Torben Jessen
- */
 @Controller
-public class Controllers {
-
-    @RequestMapping(value = "/roflcopter/{iban}", method = RequestMethod.GET)
-    @ResponseBody
-    String home(@PathVariable("iban") String iban) {
-        String rofl;
-        try {
-            IbanUtil.validate(iban);
-            rofl = "ya geht";
-        } catch (IbanFormatException | InvalidCheckDigitException | UnsupportedCountryException e) {
-            rofl = e.getMessage();
-        }
-        return rofl;
+public class Controllers{
+    
+    @RequestMapping(value = "/validate", method = RequestMethod.GET)
+    public String validateForm(Model model) {
+        model.addAttribute("ibanBicForm", new IbanBicForm());
+        return "index";
     }
-
-    @RequestMapping("/")
+    
+    @RequestMapping(value="/validate", method=RequestMethod.POST)
+    public String validateSubmit(@ModelAttribute IbanBicForm ibanBicForm, Model model) {
+        model.addAttribute("ibanBicForm", ibanBicForm);
+        return "result";
+    }
+    
+    @RequestMapping("/test")
     @ResponseBody
     String index() {
-        return "<h1>index</h1>";
+        return "<h1>Test</h1>";
     }
+
 }
